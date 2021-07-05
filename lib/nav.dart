@@ -4,29 +4,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:boardcleanerapp/pages/home.dart';
 import 'package:boardcleanerapp/pages/image.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 class Nav extends StatefulWidget {
+  final BluetoothState state;
+
+  const Nav({Key key, this.state}) : super(key: key);
   @override
   _NavState createState() => _NavState();
 }
 
+int _selectedIndex = 0;
+
 class _NavState extends State<Nav> {
-  int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Part(),
-    Voice(),
-    Images(),
-  ];
-
-  void _onItemTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    List<Widget> _widgetOptions = <Widget>[
+      Home(
+        state: widget.state,
+      ),
+      Part(),
+      Voice(),
+      Images(),
+    ];
+
+    void _onItemTap(int index) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+
     return Scaffold(
       /*appBar: AppBar(
         title: Text('Board Cleaner Mobile app'),
