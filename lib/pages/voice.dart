@@ -101,7 +101,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
           child: Container(
             padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 30.0),
             child: TextHighlight(
-              text: _text,
+              text: _text.isEmpty ? "..." : _text,
               words: _highlights,
               textStyle: const TextStyle(
                 fontSize: 25.0,
