@@ -122,6 +122,7 @@ class FindDevicesScreen extends StatelessWidget {
           ),
         ),
       ),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: StreamBuilder<bool>(
         stream: FlutterBlue.instance.isScanning,
         initialData: false,

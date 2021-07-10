@@ -105,7 +105,14 @@ class _PartState extends State<_Part> {
                 ),
               ],
             ),
-            Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 30.0)),
+            Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 20.0)),
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Bagian yang ingin dihapus',
+              ),
+            ),
+            Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0)),
             Row(
               children: <Widget>[
                 FlatButton(
