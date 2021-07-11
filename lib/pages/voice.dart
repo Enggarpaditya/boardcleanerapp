@@ -25,7 +25,7 @@ class SpeechScreen extends StatefulWidget {
 
 class _SpeechScreenState extends State<SpeechScreen> {
   final Map<String, HighlightedWord> _highlights = {
-    'flutter': HighlightedWord(
+    'hapus 1': HighlightedWord(
       onTap: () => print('hapus 1'),
       textStyle: const TextStyle(
         color: Colors.blue,
@@ -33,24 +33,24 @@ class _SpeechScreenState extends State<SpeechScreen> {
         fontSize: 25,
       ),
     ),
-    'voice': HighlightedWord(
-      onTap: () => print('voice'),
+    'hapus 2': HighlightedWord(
+      onTap: () => print('hapus 2'),
       textStyle: const TextStyle(
         color: Colors.green,
         fontWeight: FontWeight.bold,
         fontSize: 25,
       ),
     ),
-    'one': HighlightedWord(
-      onTap: () => print('one'),
+    'hapus 3': HighlightedWord(
+      onTap: () => print('hapus 3'),
       textStyle: const TextStyle(
         color: Colors.red,
         fontWeight: FontWeight.bold,
         fontSize: 25,
       ),
     ),
-    'two': HighlightedWord(
-      onTap: () => print('two'),
+    'hapus semua': HighlightedWord(
+      onTap: () => print('hapus semua'),
       textStyle: const TextStyle(
         color: Colors.blueAccent,
         fontWeight: FontWeight.bold,
