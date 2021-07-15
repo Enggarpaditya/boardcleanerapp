@@ -20,6 +20,7 @@ class _Part extends StatefulWidget {
 }
 
 class _PartState extends State<_Part> {
+  TextEditingController _textInput = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +55,9 @@ class _PartState extends State<_Part> {
                     ),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 50, horizontal: 75),
-                  onPressed: () {},
+                  onPressed: () {
+                    show_text('1');
+                  },
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(10.0, 0, 0, 0),
@@ -69,7 +72,9 @@ class _PartState extends State<_Part> {
                     ),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 50, horizontal: 75),
-                  onPressed: () {},
+                  onPressed: () {
+                    show_text('2');
+                  },
                 ),
               ],
             ),
@@ -86,7 +91,9 @@ class _PartState extends State<_Part> {
                     ),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 50, horizontal: 75),
-                  onPressed: () {},
+                  onPressed: () {
+                    show_text('3');
+                  },
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(10.0, 0, 0, 0),
@@ -101,12 +108,17 @@ class _PartState extends State<_Part> {
                     ),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 50, horizontal: 75),
-                  onPressed: () {},
+                  onPressed: () {
+                    show_text('4');
+                  },
                 ),
               ],
             ),
             Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 20.0)),
             TextField(
+              enabled: false,
+              readOnly: true,
+              controller: _textInput,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Bagian yang ingin dihapus',
@@ -144,7 +156,9 @@ class _PartState extends State<_Part> {
                     ),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  onPressed: () {},
+                  onPressed: () {
+                    empty_text();
+                  },
                 ),
               ],
             ),
@@ -152,5 +166,26 @@ class _PartState extends State<_Part> {
         ),
       ),
     );
+  }
+
+  void show_text(String num) {
+    String oldText = _textInput.text;
+    String newText = oldText + num;
+    var newValue = _textInput.value.copyWith(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length),
+        composing: TextRange.empty);
+
+    _textInput.value = newValue;
+  }
+
+  void empty_text() {
+    String newText = "";
+    var newValue = _textInput.value.copyWith(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length),
+        composing: TextRange.empty);
+
+    _textInput.value = newValue;
   }
 }

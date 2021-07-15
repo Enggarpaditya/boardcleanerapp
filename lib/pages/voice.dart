@@ -130,6 +130,12 @@ class _SpeechScreenState extends State<SpeechScreen> {
             if (val.hasConfidenceRating && val.confidence > 0) {
               _confidence = val.confidence;
             }
+            _text = _text.toLowerCase();
+            _text = _text.replaceAll('satu', '1');
+            _text = _text.replaceAll('dua', '2');
+            _text = _text.replaceAll('tiga', '3');
+            _text = _text.replaceAll('empat', '4');
+            _text = _text.replaceAll('semua', '5');
           }),
         );
       }
