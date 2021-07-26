@@ -1,12 +1,17 @@
 import 'dart:async';
 
+import 'package:boardcleanerapp/controllers/bluetoothController.dart';
 import 'package:boardcleanerapp/pages/SelectBondedDevicePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:provider/provider.dart';
 
 import 'DiscoveryPage.dart';
 
 class BluetoothSerialPage extends StatefulWidget {
+  final BluetoothController bluetooth;
+  const BluetoothSerialPage({Key key, this.bluetooth}) : super(key: key);
+
   @override
   _BluetoothSerialPage createState() => new _BluetoothSerialPage();
 }
@@ -78,15 +83,16 @@ class _BluetoothSerialPage extends State<BluetoothSerialPage> {
 
   @override
   Widget build(BuildContext context) {
+    BluetoothController bc = widget.bluetooth;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Bluetooth Serial'),
+        title: const Text('Home Bluetooth'),
       ),
       body: Container(
         child: ListView(
           children: <Widget>[
-            Divider(),
-            ListTile(title: const Text('General')),
+            /*Divider(),
+            ListTile(title: const Text('General')),*/
             SwitchListTile(
               title: const Text('Enable Bluetooth'),
               value: _bluetoothState.isEnabled,
@@ -124,7 +130,7 @@ class _BluetoothSerialPage extends State<BluetoothSerialPage> {
               subtitle: Text(_name),
               onLongPress: null,
             ),
-            ListTile(
+            /*ListTile(
               title: _discoverableTimeoutSecondsLeft == 0
                   ? const Text("Discoverable")
                   : Text(
@@ -180,7 +186,7 @@ class _BluetoothSerialPage extends State<BluetoothSerialPage> {
                   )
                 ],
               ),
-            ),
+            ),*/
             Divider(),
             ListTile(title: const Text('Devices discovery and connection')),
             SwitchListTile(
@@ -221,6 +227,8 @@ class _BluetoothSerialPage extends State<BluetoothSerialPage> {
 
                     if (selectedDevice != null) {
                       print('Discovery -> selected ' + selectedDevice.address);
+                      Provider.of<BluetoothController>(context, listen: false)
+                          .changeDevice(selectedDevice);
                     } else {
                       print('Discovery -> no device selected');
                     }
@@ -241,14 +249,17 @@ class _BluetoothSerialPage extends State<BluetoothSerialPage> {
 
                   if (selectedDevice != null) {
                     print('Connect -> selected ' + selectedDevice.address);
+
+                    Provider.of<BluetoothController>(context, listen: false)
+                        .changeDevice(selectedDevice);
                   } else {
                     print('Connect -> no device selected');
                   }
                 },
               ),
             ),
-            Divider(),
-            ListTile(title: const Text('Multiple connections example')),
+            //Divider(),
+            /*ListTile(title: const Text('Multiple connections example')),*/
           ],
         ),
       ),

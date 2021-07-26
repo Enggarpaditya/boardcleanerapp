@@ -29,9 +29,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   speech_to_text: ^2.3.0
   highlight_text: ^0.7.2
-  avatar_glow: ^1.2.0
-  flutter_blue: ^0.8.0
+  avatar_glow: ^1.2.0 
   flutter_bluetooth_serial: ^0.3.0
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,19 @@
-import 'package:flutter/foundation.dart';
+import 'dart:convert';
+
+import 'package:boardcleanerapp/controllers/bluetoothController.dart';
 import 'package:flutter/material.dart';
 
-class Part extends StatelessWidget {
+import 'package:provider/provider.dart';
+
+class Part extends StatefulWidget {
+  final BluetoothController bluetooth;
+  const Part({Key key, this.bluetooth}) : super(key: key);
+
+  @override
+  PartState createState() => PartState();
+}
+
+class PartState extends State<Part> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -9,12 +21,15 @@ class Part extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: _Part(),
+      home: _Part(bluetooth: widget.bluetooth),
     );
   }
 }
 
 class _Part extends StatefulWidget {
+  final BluetoothController bluetooth;
+  const _Part({Key key, this.bluetooth}) : super(key: key);
+
   @override
   _PartState createState() => _PartState();
 }
@@ -22,7 +37,14 @@ class _Part extends StatefulWidget {
 class _PartState extends State<_Part> {
   TextEditingController _textInput = TextEditingController();
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    BluetoothController bc = widget.bluetooth;
+    var _connected = false;
     return Scaffold(
       appBar: AppBar(
         title: Text('Part'),
@@ -56,7 +78,7 @@ class _PartState extends State<_Part> {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 50, horizontal: 75),
                   onPressed: () {
-                    show_text('1');
+                    showText('hapus 1 ');
                   },
                 ),
                 Padding(
@@ -73,7 +95,7 @@ class _PartState extends State<_Part> {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 50, horizontal: 75),
                   onPressed: () {
-                    show_text('2');
+                    showText('hapus 2 ');
                   },
                 ),
               ],
@@ -92,7 +114,7 @@ class _PartState extends State<_Part> {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 50, horizontal: 75),
                   onPressed: () {
-                    show_text('3');
+                    showText('hapus 3 ');
                   },
                 ),
                 Padding(
@@ -109,7 +131,7 @@ class _PartState extends State<_Part> {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 50, horizontal: 75),
                   onPressed: () {
-                    show_text('4');
+                    showText('hapus 4 ');
                   },
                 ),
               ],
@@ -139,7 +161,16 @@ class _PartState extends State<_Part> {
                     ),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  onPressed: () {},
+                  onPressed: () {
+                    bc.device =
+                        Provider.of<BluetoothController>(context, listen: false)
+                            .device;
+                    bc.connect();
+                    if (_connected)
+                      bc.sendOnMessageToBluetooth(_textInput.value.toString());
+                    else
+                      print('Tidak dapat mengirim pesan');
+                  },
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(5.0, 0, 0, 0),
@@ -157,7 +188,7 @@ class _PartState extends State<_Part> {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   onPressed: () {
-                    empty_text();
+                    emptyText();
                   },
                 ),
               ],
@@ -168,7 +199,7 @@ class _PartState extends State<_Part> {
     );
   }
 
-  void show_text(String num) {
+  void showText(String num) {
     String oldText = _textInput.text;
     String newText = oldText + num;
     var newValue = _textInput.value.copyWith(
@@ -179,7 +210,7 @@ class _PartState extends State<_Part> {
     _textInput.value = newValue;
   }
 
-  void empty_text() {
+  void emptyText() {
     String newText = "";
     var newValue = _textInput.value.copyWith(
         text: newText,
